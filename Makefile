@@ -1,26 +1,26 @@
-SRCS =	$(SRC_DIR)minishell.c \
-		$(SRC_DIR)parsing_all.c \
-		
-
-
-OBJS = $(SRCS:.c=.o)
-
-CC = cc
-
-SRC_DIR = src
-
-CFLAGS = -Wall -Wextra -Werror
-
 NAME = minishell
 
-LIB = ./libft
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+LDFLAGS = -lreadline
 
+LIB = ./libft
 LIBA = $(LIB)/libft.a
+
+SRC_DIR = all/srcs/
+PARSE_DIR = all/parsing/
+EXEC_DIR = all/exec/
+
+SRCS =	$(SRC_DIR)minishell.c \
+		$(PARSE_DIR)parsing_all.c \
+		$(SRC_DIR)readline.c \
+
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBA)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBA) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBA) $(LDFLAGS) -o $(NAME)
 	@echo "TOUT EST GOOD 🤓👍🔥"
 
 $(LIBA):
@@ -32,7 +32,7 @@ $(LIBA):
 clean:
 	@$(MAKE) -C $(LIB) clean
 	@rm -f $(OBJS)
-	@echo "TOUT LES FICHIERS .o 💀"
+	@echo "TOUS LES FICHIERS .o 💀"
 
 fclean: clean
 	@rm -f $(NAME)
