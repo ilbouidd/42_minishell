@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 20:04:34 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/03 06:59:41 by ilbouidd         ###   ########.fr       */
+/*   Created: 2026/05/28 10:32:45 by ilbouidd          #+#    #+#             */
+/*   Updated: 2026/05/28 10:33:51 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **envp)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_all	shell;
-	shell.av = av;
-	shell.ac = ac;
-	shell.envp = envp;
-	readline_shell(&shell);
+	size_t	i;
 
-	return (0);
+	i = 0;
+	while (s1[i] && s2[i] && (s1[i] == s2[i]))
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

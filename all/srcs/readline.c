@@ -6,28 +6,26 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 19:22:43 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/25 23:14:29 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/06/03 06:57:37 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void    readline_shell(void)
+void    readline_shell(t_all *shell)
 {
-    char *line;
 
     while (1)
     {
-        line = readline("Ilyshell: ");
-        if (!line)
-        {
-            printf("error: line\n");
+        shell->line = readline("Ilyshell: ");
+        if (!shell->line)
             break;
-        }
-        if (*line)
-            add_history(line);
-        printf("%s\n", line); //test
-        free (line);
+        if (*shell->line)
+            add_history(shell->line); 
+        split_line(shell);
+        close_shell(shell);
+        exec_shell(shell);
+        free (shell->line);
     }
     rl_clear_history();
 }

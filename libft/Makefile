@@ -10,6 +10,7 @@ SRCS = ft_atoi.c \
 		ft_strlcat.c \
 		ft_strlcpy.c \
 		ft_strlen.c \
+		ft_strcmp.c \
 		ft_strncmp.c \
 		ft_tolower.c \
 		ft_toupper.c \
@@ -39,7 +40,8 @@ SRCS = ft_atoi.c \
 		ft_printf_string.c  \
 		ft_printf.c \
 		get_next_line.c \
-		get_next_line_utils.c 
+		get_next_line_utils.c \
+		free_split.c
 
 SRCS_BONUS = ft_lstnew.c  \
 		ft_lstadd_front.c \

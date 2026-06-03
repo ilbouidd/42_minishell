@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 20:04:34 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/03 06:59:41 by ilbouidd         ###   ########.fr       */
+/*   Created: 2026/05/28 11:01:06 by ilbouidd          #+#    #+#             */
+/*   Updated: 2026/05/28 11:01:06 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	main(int ac, char **av, char **envp)
+int exec_shell(t_all *shell)
 {
-	t_all	shell;
-	shell.av = av;
-	shell.ac = ac;
-	shell.envp = envp;
-	readline_shell(&shell);
-
-	return (0);
+    if (ft_strcmp(shell->tokens[0], "echo") == 0)
+        return (ft_echo(shell));
+    else
+        printf("Command not found: %s\n", shell->tokens[0]);
+    return (1);
 }

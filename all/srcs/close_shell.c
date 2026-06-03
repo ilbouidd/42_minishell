@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   close_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 20:04:34 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/03 06:59:41 by ilbouidd         ###   ########.fr       */
+/*   Created: 2026/05/30 10:02:09 by ilbouidd          #+#    #+#             */
+/*   Updated: 2026/06/03 06:56:57 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	main(int ac, char **av, char **envp)
-{
-	t_all	shell;
-	shell.av = av;
-	shell.ac = ac;
-	shell.envp = envp;
-	readline_shell(&shell);
 
-	return (0);
+
+void	close_shell(t_all *shell)
+{
+    if (ft_strcmp(shell->tokens[0], "exit") == 0)
+    {
+        free_all(shell);
+        exit(0);
+    }
 }

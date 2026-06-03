@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 20:04:34 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/03 06:59:41 by ilbouidd         ###   ########.fr       */
+/*   Created: 2026/05/30 09:43:14 by ilbouidd          #+#    #+#             */
+/*   Updated: 2026/05/30 09:45:11 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	main(int ac, char **av, char **envp)
+void	free_all(t_all *shell)
 {
-	t_all	shell;
-	shell.av = av;
-	shell.ac = ac;
-	shell.envp = envp;
-	readline_shell(&shell);
+    int	i;
 
-	return (0);
+    if (shell->tokens)
+    {
+        i = 0;
+        while (shell->tokens[i])
+        {
+            free(shell->tokens[i]);
+            i++;
+        }
+        free(shell->tokens);
+        shell->tokens = NULL;
+    }
 }
