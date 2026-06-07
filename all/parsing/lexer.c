@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 19:22:43 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/07 11:07:51 by ilbouidd         ###   ########.fr       */
+/*   Created: 2026/06/03 13:54:17 by ilbouidd          #+#    #+#             */
+/*   Updated: 2026/06/07 11:08:45 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void    readline_shell(t_all *shell)
+void    fill_lexer(t_all *shell)
 {
+    int i;
 
-    while (1)
+    i = 0;
+    while (shell->tokens[i])
     {
-        shell->line = readline("Ilyshell: ");
-        if (!shell->line)
-            break;
-        if (*shell->line)
-            add_history(shell->line);
-        split_line(shell);
-        
-        parsing_all(shell);
-        close_shell(shell);
-        exec_shell(shell);
-        free (shell->line);
+        shell->node[i].
     }
-    rl_clear_history();
 }

@@ -6,11 +6,11 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 10:02:36 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/03 06:53:33 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/06/07 11:01:46 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../../minishell.h"
 
 static void	skip_quoted(const char *s, int *i)
 {

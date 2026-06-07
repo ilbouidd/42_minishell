@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 19:22:43 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/07 11:07:51 by ilbouidd         ###   ########.fr       */
+/*   Created: 2026/06/03 10:31:01 by ilbouidd          #+#    #+#             */
+/*   Updated: 2026/06/03 10:42:25 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void    readline_shell(t_all *shell)
+int ft_export(t_all *shell)
 {
-
-    while (1)
-    {
-        shell->line = readline("Ilyshell: ");
-        if (!shell->line)
-            break;
-        if (*shell->line)
-            add_history(shell->line);
-        split_line(shell);
+    if (!shell || !shell->tokens || !shell->tokens[0])
+        return (1);
+    if (ft_strcmp(shell->tokens[0], "export") != 0)
+        return (1);
         
-        parsing_all(shell);
-        close_shell(shell);
-        exec_shell(shell);
-        free (shell->line);
-    }
-    rl_clear_history();
+    return (0);
 }

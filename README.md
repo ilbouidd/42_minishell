@@ -96,3 +96,37 @@
 
 •tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs : fonctions de la bibliothèque terminal/termcap pour gérer l’affichage avancé du terminal.
 
+
+
+NOTE:
+
+Verofier "", quelles soit bien fermer,double et simple
+
+creer s_node
+typedef struct s_node
+{
+	int							type;   \\quel type de mot
+	char						*content; \\remplir avec shell.tokens
+	int							id;     \\pos du tokens
+	struct s_node				*next;  \\pointeur sur le suivant
+}								t_node;
+
+Voir si la ligne est correct
+
+Creer c'est struct 
+
+typedef struct s_files
+{
+	char						*path;
+	int							mode;
+	char						**heredoc_content;
+	struct s_files				*next;
+}								t_files;
+
+typedef struct s_cmd
+{
+	int							type;
+	char						**args;
+	t_files						*files;
+	struct s_cmd				*next;
+}								t_cmd;

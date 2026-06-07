@@ -16,10 +16,16 @@ SRCS = $(SRC_DIR)minishell.c \
        $(SRC_DIR)readline.c \
        $(EXEC_DIR)exec.c \
        $(EXEC_DIR)echo.c \
-       $(SRC_DIR)ft_split_minishell.c \
-       $(SRC_DIR)ft_split_utils.c	\
+       $(SRC_DIR)split/ft_split_minishell.c \
+       $(SRC_DIR)split/ft_split_utils.c	\
        $(SRC_DIR)free_all.c		\
 	   $(SRC_DIR)close_shell.c		\
+	   $(EXEC_DIR)cd.c			\
+	   $(EXEC_DIR)env.c			\
+	   $(EXEC_DIR)export.c		\
+	   $(EXEC_DIR)unset.c		\
+	   $(EXEC_DIR)pwd.c			\
+	   $(PARSE_DIR)lexer.c		\
 
 OBJS = $(SRCS:.c=.o)
 

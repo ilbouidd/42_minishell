@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 19:22:43 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/07 11:07:51 by ilbouidd         ###   ########.fr       */
+/*   Created: 2026/06/03 10:24:40 by ilbouidd          #+#    #+#             */
+/*   Updated: 2026/06/03 10:25:23 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void    readline_shell(t_all *shell)
+int ft_env(t_all *shell)
 {
+    int i;
 
-    while (1)
+    i = 0;
+    if (!shell || !shell->tokens || !shell->tokens[0])
+        return (1);
+    if (ft_strcmp(shell->tokens[0], "env") != 0)
+        return (1);
+    while (shell->envp[i])
     {
-        shell->line = readline("Ilyshell: ");
-        if (!shell->line)
-            break;
-        if (*shell->line)
-            add_history(shell->line);
-        split_line(shell);
-        
-        parsing_all(shell);
-        close_shell(shell);
-        exec_shell(shell);
-        free (shell->line);
+        printf("%s\n", shell->envp[i]);
+        i++;
     }
-    rl_clear_history();
+    return (0);
 }

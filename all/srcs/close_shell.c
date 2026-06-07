@@ -6,13 +6,11 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 10:02:09 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/03 06:56:57 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/06/03 11:13:37 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-
 
 void	close_shell(t_all *shell)
 {
