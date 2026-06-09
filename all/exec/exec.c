@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 11:01:06 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/07 10:23:55 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:05:17 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int exec_shell(t_all *shell)
 {
     if (ft_strcmp(shell->tokens[0], "echo") == 0)
-        return (ft_echo(shell));
+        return (printf("debut echo"),ft_echo(shell)); 
     // else if (ft_strcmp(shell->tokens[0], "cd") == 0)
     //     return (ft_cd(shell));
     // else if (ft_strcmp(shell->tokens[0], "env") == 0)
