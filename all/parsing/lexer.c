@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 13:54:17 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/09 14:57:04 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/06/10 18:29:24 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,5 @@ void    content_lexer(t_all *shell)
             return ;
         i++;
     }
-    print_stack(shell->stack);
+    // print_stack(shell->stack);
 }

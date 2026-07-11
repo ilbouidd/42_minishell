@@ -26,6 +26,9 @@ SRCS = $(SRC_DIR)minishell.c \
 	   $(EXEC_DIR)unset.c		\
 	   $(EXEC_DIR)pwd.c			\
 	   $(PARSE_DIR)lexer.c		\
+	   $(PARSE_DIR)lexer_parsing.c		\
+	   $(PARSE_DIR)parsing_utils.c		\
+	   $(PARSE_DIR)handle_quote.c		\
 
 OBJS = $(SRCS:.c=.o)
 

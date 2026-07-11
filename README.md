@@ -117,8 +117,8 @@ Creer c'est struct
 
 typedef struct s_files
 {
-	char						*path;
-	int							mode;
+	char						*path; \\recup le PATH
+	int							mode; 
 	char						**heredoc_content;
 	struct s_files				*next;
 }								t_files;
