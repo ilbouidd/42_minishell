@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_shell.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilbouidd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/30 10:02:09 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/07/23 11:18:50 by ilbouidd         ###   ########.fr       */
+/*   Created: 2025/11/13 13:54:14 by ilbouidd          #+#    #+#             */
+/*   Updated: 2025/11/13 14:01:33 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "libft.h"
 
-int	close_shell(t_all *shell)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	if (!shell || !shell->tokens || !shell->tokens[0])
-		return (0);
-	if (ft_strcmp(shell->tokens[0], "exit") == 0)
-    {
-        return(1);
-        exit(1);
-    }
-	return (0);
+	t_list	*tmp;
+
+	if (!lst || !del)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = tmp;
+	}
+	*lst = NULL;
 }

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   free_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 20:04:34 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/08/07 08:05:11 by ilbouidd         ###   ########.fr       */
+/*   Created: 2026/03/09 03:39:20 by ilbouidd          #+#    #+#             */
+/*   Updated: 2026/03/09 03:43:02 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **envp)
+void	free_split(char **split)
 {
-	t_all	shell;
-	if (ac == 0)
-		return (1);
-	(void)av;
-	shell.command = NULL;
-	shell.files = NULL;
-	shell.line = NULL;
-	shell.stack = NULL;
-	shell.tokens = NULL;	
-	shell.envp = envp;
-	readline_shell(&shell);
-	return (0);
+	int	i;
+
+	i = 0;
+	if (!split)
+		return ;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
