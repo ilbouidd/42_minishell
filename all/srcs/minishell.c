@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 20:04:34 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/09/02 08:24:56 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/09/02 10:06:59 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int	main(int ac, char **av, char **envp)
 	shell.last_status = 0;
 	init_signals();
 	readline_shell(&shell);
+	free_all(&shell);
 	return (0);
 }

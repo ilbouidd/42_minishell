@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 19:22:43 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/09/02 08:25:40 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/09/02 10:07:07 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void readline_shell(t_all *shell)
 		}
 		build_commands(shell);
 		shell->last_status = exec_pipeline(shell);
-		free_all(shell);
+		// free_all(shell);
 		free(shell->line);
 		shell->line = NULL;
 	}

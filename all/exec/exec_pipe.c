@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 08:03:17 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/09/02 09:38:35 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/09/02 11:02:13 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ static void exec_external(char **args, char **envp)
 	free(path);
 	exit(126);
 }
-
-
 
 static int apply_redirections(t_files *files)
 {
@@ -140,25 +138,45 @@ static void child_exec(t_all *shell, t_cmd *cmd, int prev_fd, int fd[2])
 	exec_external(cmd->args, shell->envp);
 }
 
-static int exec_one_builtin(t_all *shell, t_cmd *cmd)
+static int exec_builtin_direct(t_all *shell, t_cmd *cmd)
 {
-	pid_t	pid;
-	int		status;
+	int	status;
+	int	saved_stdin;
+	int	saved_stdout;
 
-	pid = fork();
-	if (pid == -1)
-		return (1);
-	if (pid == 0)
+	saved_stdin = -1;
+	saved_stdout = -1;
+	if (cmd->files)
 	{
-		if (cmd->files && apply_redirections(cmd->files) == -1)
-			exit(1);
-		status = exec_builtin(shell, cmd->args);
-		exit(status);
+		saved_stdin = dup(STDIN_FILENO);
+		saved_stdout = dup(STDOUT_FILENO);
+		if (apply_redirections(cmd->files) == -1)
+		{
+			if (saved_stdin != -1)
+			{
+				dup2(saved_stdin, STDIN_FILENO);
+				close(saved_stdin);
+			}
+			if (saved_stdout != -1)
+			{
+				dup2(saved_stdout, STDOUT_FILENO);
+				close(saved_stdout);
+			}
+			return (1);
+		}
 	}
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	return (1);
+	status = exec_builtin(shell, cmd->args);
+	if (saved_stdin != -1)
+	{
+		dup2(saved_stdin, STDIN_FILENO);
+		close(saved_stdin);
+	}
+	if (saved_stdout != -1)
+	{
+		dup2(saved_stdout, STDOUT_FILENO);
+		close(saved_stdout);
+	}
+	return (status);
 }
 
 int exec_pipeline(t_all *shell)
@@ -173,7 +191,6 @@ int exec_pipeline(t_all *shell)
 		|| !shell->command->args[0])
 		return (0);
 
-	// Si commande unique et que c'est "exit", on l’exécute directement
 	if (!shell->command->next
 		&& ft_strcmp(shell->command->args[0], "exit") == 0)
 	{
@@ -183,7 +200,7 @@ int exec_pipeline(t_all *shell)
 
 	if (!shell->command->next
 		&& is_builtin_cmd(shell->command->args[0]))
-		return (exec_one_builtin(shell, shell->command));
+		return (exec_builtin_direct(shell, shell->command));
 
 	cmd = shell->command;
 	prev_fd = -1;

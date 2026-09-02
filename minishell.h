@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 16:38:35 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/09/02 08:24:32 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/09/02 10:15:59 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,18 @@ typedef struct s_files
 {
 	char						*path;
 	int							mode;
+	int							is_heredoc;
 	char						**heredoc_content;
 	struct s_files				*next;
 }								t_files;
+
+// typedef struct s_files
+// {
+// 	char						*path;
+// 	int							mode;
+// 	char						**heredoc_content;
+// 	struct s_files				*next;
+// }								t_files;
 
 typedef struct s_cmd
 {

@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 09:43:14 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/09/01 07:13:25 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/09/02 11:02:26 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static void	free_files(t_files *files)
 		tmp = files->next;
 		if (files->path)
 		{
-			unlink(files->path);
+			if (files->is_heredoc)
+				unlink(files->path);
 			free(files->path);
 		}
 		free(files);
