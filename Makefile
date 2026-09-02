@@ -32,7 +32,11 @@ SRCS = $(SRC_DIR)minishell.c \
 	   $(EXEC_DIR)path.c				\
 	   $(EXEC_DIR)build_cmd.c			\
 	   $(EXEC_DIR)exec_pipe.c			\
-
+	   $(EXEC_DIR)export_utils.c		\
+	   $(EXEC_DIR)export_second.c		\
+	   $(PARSE_DIR)expands.c			\
+	   $(SRC_DIR)signals.c				\
+	   $(SRC_DIR)heredoc.c				\
 
 OBJS = $(SRCS:.c=.o)
 

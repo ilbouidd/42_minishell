@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:02:19 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/07/11 17:08:39 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/08/23 14:45:41 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ int	ft_cd(t_all *shell)
 	else
 		path = shell->tokens[1];
 	if (!path)
-	{
-		printf("cd: HOME not set");
-		return (1);
-	}
+		return (printf("cd: HOME not set"), 1);
 	if (chdir(path) == -1)
 	{
 		printf("cd: ");

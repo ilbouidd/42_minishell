@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/03 10:24:40 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/08/23 14:47:01 by ilbouidd         ###   ########.fr       */
+/*   Created: 2026/08/31 06:30:09 by ilbouidd          #+#    #+#             */
+/*   Updated: 2026/08/31 06:30:20 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int ft_env(t_all *shell)
+void	handle_sigint(int sig)
 {
-    int i;
+	(void)sig;
+	write(STDOUT_FILENO, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
 
-    i = 0;
-    if (!shell || !shell->tokens || !shell->tokens[0])
-        return (1);
-    if (ft_strcmp(shell->tokens[0], "env") != 0)
-        return (1);
-    while (shell->envp[i])
-    {
-        printf("%s\n", shell->envp[i]);
-        i++;
-    }
-    return (0);
+void	init_signals(void)
+{
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 }

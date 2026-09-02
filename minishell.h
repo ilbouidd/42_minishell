@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 16:38:35 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/08/07 08:05:50 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/09/02 08:24:32 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "pipex/pipex.h"
 # include <stdlib.h>
 # include <stdio.h>
+#include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -29,11 +30,12 @@
 
 typedef struct s_node
 {
-	int	type;
-	char *content;
-	int	id;
+	char			*content;
+	int				type;
+	int				id;
+	int				quoted;
 	struct s_node	*next;
-}	t_node;
+}					t_node;
 
 typedef struct s_files
 {
@@ -59,6 +61,7 @@ typedef struct s_all
 	t_node	*stack;
 	t_files	*files;
 	t_cmd	*command;
+	int		last_status;
 }	t_all;
 
 int	parsing_all(t_all *shell);
@@ -86,5 +89,16 @@ int is_redir(int type);
 int parse_quote(t_all *shell);
 int build_commands(t_all *shell);
 int exec_pipeline(t_all *shell);
+int is_builtin_cmd(char *cmd);
+int	export_is_valid_name(const char *name);
+char	*export_get_value(char **envp, const char *name);
+int	export_add_or_update(t_all *shell, const char *name, const char *value);
+void	export_print(char **envp);
+int	ft_export(t_all *shell);
+void	expand_all_tokens(t_all *shell);
+void	init_signals(void);
+int	handle_heredoc(t_all *shell, char *delimiter, int quoted, char **outfile);
+char    *expand_string(t_all *shell, char *str);
+char *strip_outer_quotes(char *str);
 
 # endif

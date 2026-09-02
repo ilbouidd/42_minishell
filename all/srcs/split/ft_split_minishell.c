@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 10:02:36 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/07 11:01:46 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/09/02 07:53:27 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,55 +24,28 @@ static void	skip_quoted(const char *s, int *i)
 		(*i)++;
 }
 
-static int	word_len(const char *s, int i)
-{
-	int		len;
-	char	quote;
+// static int	word_len(const char *s, int i)
+// {
+// 	int	len;
 
-	len = 0;
-	while (s[i] && !is_sep(s[i]) && !is_operator(s[i]))
-	{
-		if (is_quote(s[i]))
-		{
-			quote = s[i++];
-			while (s[i] && s[i] != quote)
-			{
-				len++;
-				i++;
-			}
-			if (s[i] == quote)
-				i++;
-		}
-		else
-			len += (i++, 1);
-	}
-	return (len);
-}
+// 	len = 0;
+// 	while (s[i] && !is_sep(s[i]) && !is_operator(s[i]))
+// 		len += (i++, 1);
+// 	return (len);
+// }
 
-static char	*fill_word(const char *s, int start, int end, char *word)
-{
-	int		j;
-	char	quote;
+// static char	*fill_word(const char *s, int start, int end, char *word)
+// {
+// 	int	j;
 
-	j = 0;
-	while (start < end)
-	{
-		if (is_quote(s[start]))
-		{
-			quote = s[start++];
-			while (start < end && s[start] != quote)
-				word[j++] = s[start++];
-			if (start < end && s[start] == quote)
-				start++;
-		}
-		else
-			word[j++] = s[start++];
-	}
-	word[j] = '\0';
-	return (word);
-}
+// 	j = 0;
+// 	while (start < end)
+// 		word[j++] = s[start++];
+// 	word[j] = '\0';
+// 	return (word);
+// }
 
-static char	*dup_word(const char *s, int *i)
+static char *dup_word(const char *s, int *i)
 {
 	int		start;
 	int		len;
@@ -86,23 +59,38 @@ static char	*dup_word(const char *s, int *i)
 		else
 			(*i)++;
 	}
-	len = word_len(s, start);
+	len = *i - start;
 	word = malloc(sizeof(char) * (len + 1));
 	if (!word)
 		return (NULL);
-	return (fill_word(s, start, *i, word));
+	word[len] = '\0';
+	ft_memcpy(word, s + start, len);
+	return (word);
 }
 
-static char	*dup_operator(const char *s, int *i)
+static char *dup_operator(const char *s, int *i)
 {
+	char	*op;
+
 	if ((s[*i] == '<' && s[*i + 1] == '<')
 		|| (s[*i] == '>' && s[*i + 1] == '>'))
 	{
+		op = malloc(3);
+		if (!op)
+			return (NULL);
+		op[0] = s[*i];
+		op[1] = s[*i + 1];
+		op[2] = '\0';
 		*i += 2;
-		return (ft_substr(s, *i - 2, 2));
+		return (op);
 	}
+	op = malloc(2);
+	if (!op)
+		return (NULL);
+	op[0] = s[*i];
+	op[1] = '\0';
 	(*i)++;
-	return (ft_substr(s, *i - 1, 1));
+	return (op);
 }
 
 static int	count_tokens(const char *s)
@@ -125,11 +113,15 @@ static int	count_tokens(const char *s)
 		else if (is_operator(s[i]))
 			i++;
 		else
+		{
 			while (s[i] && !is_sep(s[i]) && !is_operator(s[i]))
+			{
 				if (is_quote(s[i]))
 					skip_quoted(s, &i);
 				else
 					i++;
+			}
+		}
 	}
 	return (count);
 }
@@ -163,9 +155,14 @@ static char	**split_tokens(const char *s)
 	return (tokens);
 }
 
-void	split_line(t_all *shell)
+void    split_line(t_all *shell)
 {
-	if (!shell || !shell->line)
-		return ;
-	shell->tokens = split_tokens(shell->line);
+    int i;
+
+    if (!shell || !shell->line)
+        return ;
+    shell->tokens = split_tokens(shell->line);
+    i = 0;
+    while (shell->tokens && shell->tokens[i])
+        i++;
 }
